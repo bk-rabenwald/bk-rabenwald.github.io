@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://www.bergkapelle-rabenwald.at/sitemap-index.xml

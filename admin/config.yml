@@ -1,0 +1,153 @@
+# Redaktionsoberfläche (Sveltia CMS) der Bergkapelle Rabenwald
+# Aufruf: https://www.bergkapelle-rabenwald.at/admin/  – Anmeldung mit GitHub (Team „Redaktion“).
+# Jede gespeicherte Änderung landet direkt auf `main` und wird automatisch veröffentlicht.
+
+backend:
+  name: github
+  repo: bk-rabenwald/website
+  branch: main
+  # Anmeldung über den GitHub-OAuth-Dienst von Netlify (in Netlify unter Access & security → OAuth eingerichtet)
+  base_url: https://api.netlify.com
+  site_domain: bergkapelle-rabenwald.netlify.app
+  commit_messages:
+    create: 'Redaktion: „{{slug}}“ angelegt ({{collection}})'
+    update: 'Redaktion: „{{slug}}“ geändert ({{collection}})'
+    delete: 'Redaktion: „{{slug}}“ gelöscht ({{collection}})'
+    uploadMedia: 'Redaktion: Bild „{{path}}“ hochgeladen'
+    deleteMedia: 'Redaktion: Bild „{{path}}“ gelöscht'
+
+# Dateinamen: nur Kleinbuchstaben, Ziffern und Bindestriche
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+site_url: https://www.bergkapelle-rabenwald.at
+display_url: https://www.bergkapelle-rabenwald.at
+logo_url: /favicon.svg
+
+# Standard-Ablage für Bilder (wird pro Sammlung überschrieben)
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+# Fotos werden beim Hochladen automatisch verkleinert (max. 2000 px) und als WebP gespeichert
+media_libraries:
+  default:
+    config:
+      max_file_size: 25000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2000
+          height: 2000
+
+collections:
+  # ---------------------------------------------------------------- Berichte
+  - name: berichte
+    label: Berichte
+    label_singular: Bericht
+    description: Berichte von Ausrückungen, Konzerten und Festen – erscheinen unter „Aktuelles“ und auf der Startseite.
+    folder: src/content/berichte
+    path: '{{year}}-{{month}}-{{slug}}/index'
+    media_folder: ''
+    public_folder: ''
+    create: true
+    delete: true
+    identifier_field: titel
+    slug: '{{titel}}'
+    sortable_fields: [datum, titel]
+    summary: '{{datum | date("DD.MM.YYYY")}} – {{titel}}'
+    fields:
+      - { label: Titel, name: titel, widget: string, hint: 'z. B. „Frühjahrskonzert 2027“' }
+      - { label: Datum, name: datum, widget: datetime, time_format: false, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY' }
+      - { label: Kurzfassung, name: zusammenfassung, widget: text, hint: 'Ein bis zwei Sätze für die Übersicht (max. 250 Zeichen).', pattern: ['^[\s\S]{1,250}$', 'Bitte höchstens 250 Zeichen.'] }
+      - { label: Titelbild, name: titelbild, widget: image, hint: 'Querformat wirkt am besten.' }
+      - { label: Beschreibung des Titelbilds, name: titelbild_alt, widget: string, required: false, hint: 'Was ist zu sehen? (für Menschen mit Sehbeeinträchtigung)' }
+      - label: Fotos
+        name: bilder
+        widget: list
+        required: false
+        max: 20
+        hint: 'Höchstens 20 ausgewählte Fotos – die vollständige Galerie gerne auf Facebook oder Instagram.'
+        field: { label: Foto, name: bild, widget: image }
+      - { label: Verfasst von, name: autor, widget: string, required: false }
+      - { label: Entwurf (noch nicht veröffentlichen), name: entwurf, widget: boolean, default: false, required: false }
+      - { label: Text, name: body, widget: markdown, buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list, quote], editor_components: [] }
+
+  # ---------------------------------------------------------- Veranstaltungen
+  - name: veranstaltungen
+    label: Veranstaltungen
+    label_singular: Veranstaltung
+    description: Eigene Großveranstaltungen mit Plakat (Frühjahrskonzert, Frühschoppen, Kirchenkonzert …). Die übrigen Auftritte kommen automatisch aus Konzertmeister.
+    folder: src/content/veranstaltungen
+    path: '{{year}}-{{slug}}/index'
+    media_folder: ''
+    public_folder: ''
+    create: true
+    delete: true
+    identifier_field: titel
+    slug: '{{titel}}'
+    sortable_fields: [datum, titel]
+    summary: '{{datum | date("DD.MM.YYYY")}} – {{titel}}'
+    fields:
+      - { label: Titel, name: titel, widget: string, hint: 'z. B. „Frühjahrskonzert 2027“' }
+      - label: Art
+        name: art
+        widget: select
+        default: sonstige
+        hint: 'Bestimmt die Farbe der Veranstaltungsseite (wie auf den Plakaten).'
+        options:
+          - { label: 'Frühjahrskonzert (violett)', value: fruehjahrskonzert }
+          - { label: 'Frühschoppen (grün)', value: fruehschoppen }
+          - { label: 'Kirchenkonzert', value: kirchenkonzert }
+          - { label: 'Sonstige Veranstaltung', value: sonstige }
+      - { label: Datum, name: datum, widget: datetime, time_format: false, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY' }
+      - { label: Beginn, name: beginn, widget: string, required: false, hint: 'z. B. 19:30', pattern: ['^([01]?\d|2[0-3]):[0-5]\d$', 'Bitte als Uhrzeit, z. B. 19:30'] }
+      - { label: Ort, name: ort, widget: string, hint: 'z. B. Sport- und Kultursaal Anger' }
+      - { label: Eintritt, name: eintritt, widget: string, required: false, hint: 'z. B. VVK € 10, AK € 14, Kinder bis 14 frei' }
+      - { label: Plakat, name: plakat, widget: image, required: false, hint: 'Plakat als Bild (JPG/PNG). PDF bitte vorher als Bild speichern.' }
+      - { label: Kurzfassung, name: zusammenfassung, widget: text, required: false, hint: 'Ein Satz für Startseite und Terminliste.' }
+      - { label: Entwurf (noch nicht veröffentlichen), name: entwurf, widget: boolean, default: false, required: false }
+      - { label: Beschreibung, name: body, widget: markdown, required: false, buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list], editor_components: [] }
+
+  # ------------------------------------------------------- Musikerinnen & Musiker
+  - name: musiker
+    label: Musikerinnen & Musiker
+    label_singular: Person
+    description: 'Eine Datei pro Person. Nur Name, Instrument, Register, Funktion und Foto – keine weiteren Daten. Bei Widerruf der Einwilligung Eintrag löschen.'
+    folder: src/content/musiker
+    extension: json
+    format: json
+    media_folder: ../../assets/musiker
+    public_folder: ../../assets/musiker
+    create: true
+    delete: true
+    identifier_field: nachname
+    slug: '{{nachname}}-{{vorname}}'
+    sortable_fields: [nachname, vorname, register]
+    summary: '{{nachname}} {{vorname}} – {{instrument}}'
+    view_groups:
+      - { label: Register, field: register }
+    fields:
+      - { label: Vorname, name: vorname, widget: string }
+      - { label: Nachname, name: nachname, widget: string }
+      - { label: Instrument, name: instrument, widget: string, hint: 'z. B. Klarinette, Tenorhorn, Schlagzeug' }
+      - label: Register
+        name: register
+        widget: select
+        options:
+              - { label: 'Musikalische Leitung', value: 'leitung' }
+              - { label: 'Flöten', value: 'floeten' }
+              - { label: 'Fagott', value: 'fagott' }
+              - { label: 'Klarinetten', value: 'klarinetten' }
+              - { label: 'Saxophone', value: 'saxophone' }
+              - { label: 'Flügelhörner', value: 'fluegelhoerner' }
+              - { label: 'Trompeten', value: 'trompeten' }
+              - { label: 'Hörner', value: 'hoerner' }
+              - { label: 'Tenorhörner', value: 'tenorhoerner' }
+              - { label: 'Posaunen', value: 'posaunen' }
+              - { label: 'Tuben', value: 'tuben' }
+              - { label: 'Schlagwerk', value: 'schlagwerk' }
+      - { label: Funktion, name: funktion, widget: string, required: false, hint: 'nur bei musikalischer Leitung, z. B. Kapellmeister, Stabführer' }
+      - { label: Foto, name: foto, widget: image, required: false, hint: 'Brustbild im Hochformat (4:5)' }
