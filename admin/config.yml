@@ -1,14 +1,15 @@
 # Redaktionsoberfläche (Sveltia CMS) der Bergkapelle Rabenwald
-# Aufruf: https://www.bergkapelle-rabenwald.at/admin/  – Anmeldung mit GitHub (Team „Redaktion“).
+# Aufruf: https://www.bergkapelle-rabenwald.at/admin/  – Anmeldung mit GitHub (Mitwirkende im Repository `website`).
 # Jede gespeicherte Änderung landet direkt auf `main` und wird automatisch veröffentlicht.
 
 backend:
   name: github
   repo: bk-rabenwald/website
   branch: main
-  # Anmeldung über den GitHub-OAuth-Dienst von Netlify (in Netlify unter Access & security → OAuth eingerichtet)
-  base_url: https://api.netlify.com
-  site_domain: bergkapelle-rabenwald.netlify.app
+  # Anmeldung über den Dienst sveltia-cms-auth im Cloudflare-Konto des Vereins (Worker `sveltia-cms-auth`) mit der
+  # GitHub-App „Redaktion Bergkapelle Rabenwald“ (nur auf dieses Repository installiert, Recht: Contents read/write).
+  # Der Dienst gibt Zugänge nur an Seiten unter ALLOWED_DOMAINS (www.bergkapelle-rabenwald.at) heraus.
+  base_url: https://sveltia-cms-auth.lucky-wildflower-c532.workers.dev
   commit_messages:
     create: 'Redaktion: „{{slug}}“ angelegt ({{collection}})'
     update: 'Redaktion: „{{slug}}“ geändert ({{collection}})'
