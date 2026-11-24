@@ -21,7 +21,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:2027-fruehjahrskonzert-2027@bergkapelle-rabenwald.at
-DTSTAMP:20261123T190218Z
+DTSTAMP:20261124T053320Z
 DTSTART;TZID=Europe/Vienna:20270306T193000
 SUMMARY:Frühjahrskonzert 2027 – Bergkapelle Rabenwald
 LOCATION:Sport- und Kultursaal Anger
