@@ -25,7 +25,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:SHAP_8b5a0155-f8bf-46e9-b392-d3c65bc664f0@bergkapelle-rabenwald.at
-DTSTAMP:20261124T180329Z
+DTSTAMP:20261124T185141Z
 DTSTART;TZID=Europe/Vienna:20261128T160000
 SUMMARY:Barbarafeier – Bergkapelle Rabenwald
 LOCATION:Bahnhofstraße 16\, Anger
@@ -34,7 +34,7 @@ URL:https://www.bergkapelle-rabenwald.at/termine/
 END:VEVENT
 BEGIN:VEVENT
 UID:SHAP_5047add3-06a4-44d0-afe6-6027bb624d2b@bergkapelle-rabenwald.at
-DTSTAMP:20261124T180329Z
+DTSTAMP:20261124T185141Z
 DTSTART;TZID=Europe/Vienna:20261212T131500
 SUMMARY:Lebinger Advent – Bergkapelle Rabenwald
 LOCATION:Lebing
@@ -43,7 +43,7 @@ URL:https://www.bergkapelle-rabenwald.at/termine/
 END:VEVENT
 BEGIN:VEVENT
 UID:SHAP_b609f644-2cc6-4430-956e-2a4068f08a2f@bergkapelle-rabenwald.at
-DTSTAMP:20261124T180329Z
+DTSTAMP:20261124T185141Z
 DTSTART;VALUE=DATE:20261227
 DTEND;VALUE=DATE:20261229
 SUMMARY:Neujahrsgeign – Bergkapelle Rabenwald
@@ -52,7 +52,7 @@ URL:https://www.bergkapelle-rabenwald.at/termine/
 END:VEVENT
 BEGIN:VEVENT
 UID:SHAP_20bfd633-2400-4d02-803b-b1f2969dfadf@bergkapelle-rabenwald.at
-DTSTAMP:20261124T180329Z
+DTSTAMP:20261124T185141Z
 DTSTART;TZID=Europe/Vienna:20270306T193000
 SUMMARY:Frühjahrskonzert – Bergkapelle Rabenwald
 LOCATION:Sport- und Kultursaal Anger
@@ -63,7 +63,7 @@ URL:https://www.bergkapelle-rabenwald.at/veranstaltungen/2027-fruehjahrskon
 END:VEVENT
 BEGIN:VEVENT
 UID:SHAP_14b90735-4cbc-4154-a2ef-e2037679a31b@bergkapelle-rabenwald.at
-DTSTAMP:20261124T180329Z
+DTSTAMP:20261124T185141Z
 DTSTART;VALUE=DATE:20270606
 SUMMARY:Frühschoppen Bergkapelle Rabenwald – Bergkapelle Rabenwald
 DESCRIPTION:https://www.bergkapelle-rabenwald.at/termine/
@@ -71,7 +71,7 @@ URL:https://www.bergkapelle-rabenwald.at/termine/
 END:VEVENT
 BEGIN:VEVENT
 UID:SHAP_c68f1cfc-7aac-4552-8100-1bf807bbd137@bergkapelle-rabenwald.at
-DTSTAMP:20261124T180329Z
+DTSTAMP:20261124T185141Z
 DTSTART;VALUE=DATE:20270911
 SUMMARY:BMT Koglhof – Bergkapelle Rabenwald
 DESCRIPTION:https://www.bergkapelle-rabenwald.at/termine/
@@ -79,7 +79,7 @@ URL:https://www.bergkapelle-rabenwald.at/termine/
 END:VEVENT
 BEGIN:VEVENT
 UID:SHAP_c6c0c152-f59f-4a18-ab1d-c136741781ab@bergkapelle-rabenwald.at
-DTSTAMP:20261124T180329Z
+DTSTAMP:20261124T185141Z
 DTSTART;VALUE=DATE:20270918
 SUMMARY:180 Jahre Stixpeter - Frühschoppen – Bergkapelle Rabenwald
 LOCATION:Unterfeistritz 17\, Floing
